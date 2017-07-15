@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Help - ATWiki</title>
+  <style type="text/css">
+    a {
+      color: #3366FF;
+      text-decoration: none;
+      transition: all 0.5s;
+    }
+    a:hover {
+      color: #FFCC33;
+      cursor: pointer;
+      text-shadow: 0.0em 0.0em 0.05em #000099;
+      transition: all 0.3s;
+    }
+    a:active {
+      color: #000099;
+      transition: all 0.3s;
+    }
+    blockquote {
+      background-color:#ffffe0;
+    }
+  </style>
+</head>
+<body>
+<h5><a href="javascript:void(0)" onclick="window.external.home();">Back to home</a></h5>
+<h1>Help</h1>
+<hr />
+<ol style="margin-left: 0px; ">
+<li><h3>Getting Started</h3>
+<div>Select <b>New</b> from menu to create new document. Or <b>Open</b> your exist <b>TiddlyWiki</b> document.<br />
+In <b>TiddlyWiki</b> document's option, you can choose appropriate language, plugin and theme.<br />
+When you edited the document, <b>ATWiki</b> will automatically save the modified document to replace the old one.<br />
+</li>
+<li><h3>Backup</h3>
+<div><b>ATWiki</b> does not provide backup ability.<br />
+You can send documents to mailbox, synchronize to cloud disk or copy to other device.</div>
+</li>
+<li><h3>Task List</h3>
+<div>Create a new <b>Tiddler</b> which include the following content, to get a task list.<br />
+<blockquote>
+&lt;$button&gt;<br />
+&lt;$action-sendmessage $message=&quot;tm-new-tiddler&quot; title=&lt;&lt;now &quot;Task YYYY-MM-DD 0hh:0mm:0ss&quot;&gt;&gt; tags=&quot;Task&quot; text=&quot;&quot;/&gt;<br />
+New task<br />
+&lt;/$button&gt;<br />
+<br />
+! In progress task&lt;br /&gt;<br />
+&lt;$list filter=&quot;[!has[draft.of]tag[Task]!tag[Complete]sort[created]]&quot;&gt;<br />
+&lt;$checkbox tag=&quot;Complete&quot;&gt; &lt;$link to={{!!title}}&gt;&lt;$view field=&quot;title&quot;/&gt;&lt;/$link&gt;&lt;/$checkbox&gt;&lt;br/&gt;<br />
+&lt;/$list&gt;<br />
+<br />
+! Completed task&lt;br /&gt;<br />
+&lt;$list filter=&quot;[!has[draft.of]tag[Task]tag[Complete]sort[created]]&quot;&gt;<br />
+&lt;$checkbox tag=&quot;Complete&quot;&gt; ~~&lt;$link to={{!!title}}&gt;&lt;$view field=&quot;title&quot;/&gt;&lt;/$link&gt;~~&lt;/$checkbox&gt;&lt;br /&gt;<br />
+&lt;/$list&gt;<br />
+</blockquote>
+</div>
+</li>
+</ol>
+
+<script language="javascript" type="text/javascript">
+  window.onbeforeunload = function(event) {
+    return;
+  }
+</script>
+</body>
+</html>

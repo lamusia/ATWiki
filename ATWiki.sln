@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+# SharpDevelop 5.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATWiki", "ATWiki.csproj", "{ECCF6AF3-2DFF-42F6-9949-1C3337E30A13}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECCF6AF3-2DFF-42F6-9949-1C3337E30A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECCF6AF3-2DFF-42F6-9949-1C3337E30A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECCF6AF3-2DFF-42F6-9949-1C3337E30A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECCF6AF3-2DFF-42F6-9949-1C3337E30A13}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
