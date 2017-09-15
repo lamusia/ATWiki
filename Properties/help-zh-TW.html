@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>幫助 - ATWiki</title>
+  <style type="text/css">
+    a {
+      color: #3366FF;
+      text-decoration: none;
+      transition: all 0.5s;
+    }
+    a:hover {
+      color: #FFCC33;
+      cursor: pointer;
+      text-shadow: 0.0em 0.0em 0.05em #000099;
+      transition: all 0.3s;
+    }
+    a:active {
+      color: #000099;
+      transition: all 0.3s;
+    }
+    blockquote {
+      background-color:#ffffe0;
+    }
+  </style>
+</head>
+<body>
+<h5><a href="javascript:void(0)" onclick="window.external.home();">返回主頁</a></h5>
+<h1>幫助</h1>
+<hr />
+<ol style="margin-left: 0px; ">
+<li><h3>開始使用</h3>
+<div>從功能表選擇<b>新建</b>以創建新文檔，或者<b>打開</b>已有的 <b>TiddlyWiki</b> 文檔。<br />
+在 <b>TiddlyWiki</b> 的選項中，您可以選擇合適的語言、外掛程式和主題。<br />
+當文檔修改完畢後，<b>ATWiki</b> 會自動存儲修改後的文檔以替換舊的。</div>
+</li>
+<li><h3>備份文檔</h3>
+<div><b>ATWiki</b> 不提供備份功能。<br />
+您可以將文檔發送至郵箱、同步至網盤或複製到其它設備。</div>
+</li>
+<li><h3>任務列表</h3>
+<div>創建一個包含以下內容新的<b>條目</b>，即可獲得一個任務列表。<br />
+<blockquote>
+&lt;$button&gt;<br />
+&lt;$action-sendmessage $message=&quot;tm-new-tiddler&quot; title=&lt;&lt;now &quot;任務 YYYY-MM-DD 0hh:0mm:0ss&quot;&gt;&gt; tags=&quot;任務&quot; text=&quot;&quot;/&gt;<br />
+新任務<br />
+&lt;/$button&gt;<br />
+<br />
+! 進行中任務&lt;br /&gt;<br />
+&lt;$list filter=&quot;[!has[draft.of]tag[任務]!tag[完成]sort[created]]&quot;&gt;<br />
+&lt;$checkbox tag=&quot;完成&quot;&gt; &lt;$link to={{!!title}}&gt;&lt;$view field=&quot;title&quot;/&gt;&lt;/$link&gt;&lt;/$checkbox&gt;&lt;br/&gt;<br />
+&lt;/$list&gt;<br />
+<br />
+! 已完成任務&lt;br /&gt;<br />
+&lt;$list filter=&quot;[!has[draft.of]tag[任務]tag[完成]sort[created]]&quot;&gt;<br />
+&lt;$checkbox tag=&quot;完成&quot;&gt; ~~&lt;$link to={{!!title}}&gt;&lt;$view field=&quot;title&quot;/&gt;&lt;/$link&gt;~~&lt;/$checkbox&gt;&lt;br /&gt;<br />
+&lt;/$list&gt;<br />
+</blockquote>
+</div>
+</li>
+</ol>
+
+<script language="javascript" type="text/javascript">
+  window.onbeforeunload = function(event) {
+    return;
+  }
+</script>
+</body>
+</html>

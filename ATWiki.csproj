@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\zh-CN.resx" />
+    <EmbeddedResource Include="Properties\zh-TW.resx" />
     <EmbeddedResource Include="Source\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -183,6 +184,8 @@
     <EmbeddedResource Include="Properties\help.html" />
     <EmbeddedResource Include="Properties\help-zh-CN.html" />
     <Content Include="Source\ObjectListView\CustomDictionary.xml" />
+    <EmbeddedResource Include="Properties\about-zh-TW.html" />
+    <EmbeddedResource Include="Properties\help-zh-TW.html" />
     <None Include="Source\ObjectListView\Resources\clear-filter.png" />
     <None Include="Source\ObjectListView\Resources\filter-icons3.png" />
     <None Include="Source\ObjectListView\Resources\filter.png" />

@@ -9,6 +9,12 @@ Unlike conventional online services, `TiddlyWiki` lets you choose where to keep 
 
 `ATWiki` is an independent project of `TiddlyWiki`.
 
+## Downloads
+
+[ATWiki 1.6.7z](https://raw.githubusercontent.com/lamusia/ATWiki/master/Release/ATWiki%201.6.7z)
+
+[Other](https://github.com/lamusia/ATWiki/tree/master/Release)
+
 ## Screenshots
 
 ![screenshots](https://raw.githubusercontent.com/lamusia/atwiki/master/Screenshots/1.png)

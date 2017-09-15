@@ -391,6 +391,9 @@ namespace ATWiki {
   /// </summary>
   [System.Runtime.InteropServices.ComVisibleAttribute(true)]
   public class WebInterface {
+    public string version() {
+      return Program.sVersion;
+    }
     public void showMessage(string text) {
       MessageBox.Show(text);
     }
