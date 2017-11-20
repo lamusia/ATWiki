@@ -228,7 +228,7 @@ namespace ATWiki {
           + "  return window.external.saveFile(document.location.pathname.substr(1), text);"
           + "};"
           + "function addSaver() {"
-          + "  if (typeof($tw) != 'undefined' && typeof($tw.saverHandler.savers) != 'undefined') {"
+          + "  if (typeof($tw) != 'undefined' && typeof($tw.saverHandler) != 'undefined' && typeof($tw.saverHandler.savers) != 'undefined') {"
           //+ "    alert('addSaver');"
           + "    $tw.saverHandler.savers.push({"
           + "      info: {"

@@ -11,7 +11,7 @@ Unlike conventional online services, `TiddlyWiki` lets you choose where to keep 
 
 ## Downloads
 
-[ATWiki 1.6.7z](https://raw.githubusercontent.com/lamusia/ATWiki/master/Release/ATWiki%201.6.7z)
+[ATWiki 1.7.7z](https://raw.githubusercontent.com/lamusia/ATWiki/master/Release/ATWiki%201.7.7z)
 
 [Other](https://github.com/lamusia/ATWiki/tree/master/Release)
 

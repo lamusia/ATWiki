@@ -16,7 +16,7 @@ namespace ATWiki {
     public static I18n i18n = null;
     
     public const string sTitle = "ATWiki";
-    public const string sVersion = "1.6";
+    public const string sVersion = "1.7";
     
     
     [STAThread]

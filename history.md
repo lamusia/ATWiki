@@ -1,3 +1,7 @@
+1.7
+[improve] TiddlyWiki update to 5.1.15
+[improve] compatibility with encrypted document
+
 1.6
 [add] Traditional Chinese Translation
 
