@@ -59,6 +59,9 @@
       this.toolStripMenuItemRemove = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItemRemoveAll = new System.Windows.Forms.ToolStripMenuItem();
       this.panel1 = new System.Windows.Forms.Panel();
+      this.label1 = new System.Windows.Forms.Label();
+      this.button1 = new System.Windows.Forms.Button();
+      this.textBox1 = new System.Windows.Forms.TextBox();
       this.labelTitle = new System.Windows.Forms.Label();
       this.buttonAbout = new System.Windows.Forms.Button();
       this.buttonHelp = new System.Windows.Forms.Button();
@@ -67,15 +70,15 @@
       this.pictureBox1 = new System.Windows.Forms.PictureBox();
       this.panel2 = new System.Windows.Forms.Panel();
       this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
-      this.columnName = new BrightIdeasSoftware.OLVColumn();
-      this.columnDate = new BrightIdeasSoftware.OLVColumn();
-      this.columnSize = new BrightIdeasSoftware.OLVColumn();
+      this.columnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+      this.columnDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+      this.columnSize = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       this.panel3 = new System.Windows.Forms.Panel();
       this.labelRecent = new System.Windows.Forms.Label();
-      this.comboBox1 = new System.Windows.Forms.ComboBox();
       this.labelSort = new System.Windows.Forms.Label();
-      this.textBoxFilter = new System.Windows.Forms.TextBox();
+      this.comboBox1 = new System.Windows.Forms.ComboBox();
       this.labelSearch = new System.Windows.Forms.Label();
+      this.textBoxFilter = new System.Windows.Forms.TextBox();
       this.contextMenuStrip1.SuspendLayout();
       this.panel1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -100,47 +103,50 @@
       this.toolStripMenuItemRemove,
       this.toolStripMenuItemRemoveAll});
       this.contextMenuStrip1.Name = "contextMenuStrip1";
-      this.contextMenuStrip1.Size = new System.Drawing.Size(262, 144);
+      this.contextMenuStrip1.Size = new System.Drawing.Size(208, 114);
       this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1Opening);
       // 
       // toolStripMenuItemOpen
       // 
       this.toolStripMenuItemOpen.Name = "toolStripMenuItemOpen";
-      this.toolStripMenuItemOpen.Size = new System.Drawing.Size(261, 28);
+      this.toolStripMenuItemOpen.Size = new System.Drawing.Size(207, 22);
       this.toolStripMenuItemOpen.Text = "Open";
       this.toolStripMenuItemOpen.Click += new System.EventHandler(this.ToolStripMenuItemOpenClick);
       // 
       // toolStripMenuItemLocation
       // 
       this.toolStripMenuItemLocation.Name = "toolStripMenuItemLocation";
-      this.toolStripMenuItemLocation.Size = new System.Drawing.Size(261, 28);
+      this.toolStripMenuItemLocation.Size = new System.Drawing.Size(207, 22);
       this.toolStripMenuItemLocation.Text = "Go to file location";
       this.toolStripMenuItemLocation.Click += new System.EventHandler(this.ToolStripMenuItemLocationClick);
       // 
       // toolStripMenuItemDelete
       // 
       this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
-      this.toolStripMenuItemDelete.Size = new System.Drawing.Size(261, 28);
+      this.toolStripMenuItemDelete.Size = new System.Drawing.Size(207, 22);
       this.toolStripMenuItemDelete.Text = "Permanently delete";
       this.toolStripMenuItemDelete.Click += new System.EventHandler(this.ToolStripMenuItemDeleteClick);
       // 
       // toolStripMenuItemRemove
       // 
       this.toolStripMenuItemRemove.Name = "toolStripMenuItemRemove";
-      this.toolStripMenuItemRemove.Size = new System.Drawing.Size(261, 28);
+      this.toolStripMenuItemRemove.Size = new System.Drawing.Size(207, 22);
       this.toolStripMenuItemRemove.Text = "Remove this from list";
       this.toolStripMenuItemRemove.Click += new System.EventHandler(this.ToolStripMenuItemRemoveClick);
       // 
       // toolStripMenuItemRemoveAll
       // 
       this.toolStripMenuItemRemoveAll.Name = "toolStripMenuItemRemoveAll";
-      this.toolStripMenuItemRemoveAll.Size = new System.Drawing.Size(261, 28);
+      this.toolStripMenuItemRemoveAll.Size = new System.Drawing.Size(207, 22);
       this.toolStripMenuItemRemoveAll.Text = "Remove all from list";
       this.toolStripMenuItemRemoveAll.Click += new System.EventHandler(this.ToolStripMenuItemRemoveAllClick);
       // 
       // panel1
       // 
       this.panel1.BackColor = System.Drawing.Color.LightSkyBlue;
+      this.panel1.Controls.Add(this.label1);
+      this.panel1.Controls.Add(this.button1);
+      this.panel1.Controls.Add(this.textBox1);
       this.panel1.Controls.Add(this.labelTitle);
       this.panel1.Controls.Add(this.buttonAbout);
       this.panel1.Controls.Add(this.buttonHelp);
@@ -153,6 +159,34 @@
       this.panel1.Name = "panel1";
       this.panel1.Size = new System.Drawing.Size(300, 600);
       this.panel1.TabIndex = 0;
+      // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.Location = new System.Drawing.Point(30, 478);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(91, 13);
+      this.label1.TabIndex = 32;
+      this.label1.Text = "Backup Location:";
+      // 
+      // button1
+      // 
+      this.button1.Location = new System.Drawing.Point(195, 523);
+      this.button1.Name = "button1";
+      this.button1.Size = new System.Drawing.Size(75, 23);
+      this.button1.TabIndex = 31;
+      this.button1.Text = "Browse...";
+      this.button1.UseVisualStyleBackColor = true;
+      this.button1.Click += new System.EventHandler(this.button1_Click);
+      // 
+      // textBox1
+      // 
+      this.textBox1.Location = new System.Drawing.Point(30, 497);
+      this.textBox1.Name = "textBox1";
+      this.textBox1.ReadOnly = true;
+      this.textBox1.Size = new System.Drawing.Size(240, 20);
+      this.textBox1.TabIndex = 30;
+      this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
       // 
       // labelTitle
       // 
@@ -333,9 +367,20 @@
       this.labelRecent.Location = new System.Drawing.Point(8, 13);
       this.labelRecent.Margin = new System.Windows.Forms.Padding(8, 13, 8, 8);
       this.labelRecent.Name = "labelRecent";
-      this.labelRecent.Size = new System.Drawing.Size(152, 18);
+      this.labelRecent.Size = new System.Drawing.Size(99, 13);
       this.labelRecent.TabIndex = 0;
       this.labelRecent.Text = "Recent Documents";
+      // 
+      // labelSort
+      // 
+      this.labelSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.labelSort.AutoSize = true;
+      this.labelSort.Location = new System.Drawing.Point(273, 13);
+      this.labelSort.Margin = new System.Windows.Forms.Padding(8, 13, 8, 8);
+      this.labelSort.Name = "labelSort";
+      this.labelSort.Size = new System.Drawing.Size(26, 13);
+      this.labelSort.TabIndex = 1;
+      this.labelSort.Text = "Sort";
       // 
       // comboBox1
       // 
@@ -354,31 +399,9 @@
       this.comboBox1.Location = new System.Drawing.Point(345, 9);
       this.comboBox1.Margin = new System.Windows.Forms.Padding(8, 9, 8, 8);
       this.comboBox1.Name = "comboBox1";
-      this.comboBox1.Size = new System.Drawing.Size(115, 26);
+      this.comboBox1.Size = new System.Drawing.Size(115, 21);
       this.comboBox1.TabIndex = 2;
       this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.ComboBox1SelectionChangeCommitted);
-      // 
-      // labelSort
-      // 
-      this.labelSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.labelSort.AutoSize = true;
-      this.labelSort.Location = new System.Drawing.Point(273, 13);
-      this.labelSort.Margin = new System.Windows.Forms.Padding(8, 13, 8, 8);
-      this.labelSort.Name = "labelSort";
-      this.labelSort.Size = new System.Drawing.Size(44, 18);
-      this.labelSort.TabIndex = 1;
-      this.labelSort.Text = "Sort";
-      // 
-      // textBoxFilter
-      // 
-      this.textBoxFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.textBoxFilter.BackColor = System.Drawing.Color.LightSkyBlue;
-      this.textBoxFilter.Location = new System.Drawing.Point(557, 8);
-      this.textBoxFilter.Margin = new System.Windows.Forms.Padding(8, 8, 20, 8);
-      this.textBoxFilter.Name = "textBoxFilter";
-      this.textBoxFilter.Size = new System.Drawing.Size(150, 28);
-      this.textBoxFilter.TabIndex = 4;
-      this.textBoxFilter.TextChanged += new System.EventHandler(this.TextBoxFilterTextChanged);
       // 
       // labelSearch
       // 
@@ -387,9 +410,20 @@
       this.labelSearch.Location = new System.Drawing.Point(485, 13);
       this.labelSearch.Margin = new System.Windows.Forms.Padding(20, 13, 8, 8);
       this.labelSearch.Name = "labelSearch";
-      this.labelSearch.Size = new System.Drawing.Size(62, 18);
+      this.labelSearch.Size = new System.Drawing.Size(41, 13);
       this.labelSearch.TabIndex = 3;
       this.labelSearch.Text = "Search";
+      // 
+      // textBoxFilter
+      // 
+      this.textBoxFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.textBoxFilter.BackColor = System.Drawing.Color.LightSkyBlue;
+      this.textBoxFilter.Location = new System.Drawing.Point(557, 8);
+      this.textBoxFilter.Margin = new System.Windows.Forms.Padding(8, 8, 20, 8);
+      this.textBoxFilter.Name = "textBoxFilter";
+      this.textBoxFilter.Size = new System.Drawing.Size(150, 20);
+      this.textBoxFilter.TabIndex = 4;
+      this.textBoxFilter.TextChanged += new System.EventHandler(this.TextBoxFilterTextChanged);
       // 
       // UserControlFile
       // 
@@ -401,6 +435,7 @@
       this.Load += new System.EventHandler(this.UserControlFileLoad);
       this.contextMenuStrip1.ResumeLayout(false);
       this.panel1.ResumeLayout(false);
+      this.panel1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
       this.panel2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
@@ -409,5 +444,9 @@
       this.ResumeLayout(false);
 
     }
-  }
+
+      private System.Windows.Forms.Label label1;
+      private System.Windows.Forms.Button button1;
+      private System.Windows.Forms.TextBox textBox1;
+    }
 }

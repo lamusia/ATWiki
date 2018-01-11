@@ -45,7 +45,6 @@ namespace ATWiki {
       this.labelSort.Location = new System.Drawing.Point(
         this.comboBox1.Location.X - this.labelSort.Size.Width - 8 * Program.dpiZoom / 100,
         this.labelSort.Location.Y);
-      
     }
     void UserControlFileLoad(object sender, EventArgs e) {
       // 设置 Renderer
@@ -57,7 +56,7 @@ namespace ATWiki {
       // 行高
       this.objectListView1.RowHeight = 54;
       // 设置属性
-      this.objectListView1.EmptyListMsg = Program.i18n.GetString("No thing to show");
+      this.objectListView1.EmptyListMsg = Program.i18n.GetString("Nothing to show");
       this.objectListView1.UseAlternatingBackColors = false;
       // Put a little bit of space around the task and its description
       // this.columnName.CellPadding = new Rectangle(4, 2, 4, 2);
@@ -78,6 +77,8 @@ namespace ATWiki {
       //Console.WriteLine("sortType : " + sortType + " - " + sortType.Length.ToString());
       comboBox1.Text = Program.i18n.GetString(sortType.Substring(0, sortType.Length - 1)) + sortType.Substring(sortType.Length - 1);
       ComboBox1SelectionChangeCommitted(null, null);
+                  
+      this.textBox1.Text = Program.mainForm.BackupLocation;    
     }
     
     void ButtonNewClick(object sender, EventArgs e) {
@@ -256,12 +257,25 @@ namespace ATWiki {
       Program.mainForm.filelist.Clear();
       buildListView();
     }
-  }
-  
-  /// <summary>
-  /// Dumb model class
-  /// </summary>
-  public class ListObject {
+
+    void textBox1_TextChanged(object sender, EventArgs e) {
+      Program.mainForm.backupLocation = textBox1.Text;            
+    }
+
+    void button1_Click(object sender, EventArgs e) {
+      FolderBrowserDialog browseDialog = new FolderBrowserDialog();
+      DialogResult result = browseDialog.ShowDialog();
+      
+      if (result == DialogResult.OK) {
+        textBox1.Text = browseDialog.SelectedPath;        
+      }
+    }
+    }
+
+    /// <summary>
+    /// Dumb model class
+    /// </summary>
+    public class ListObject {
     public string Name;
     public string Image;
     public string Description;
