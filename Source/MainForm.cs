@@ -16,6 +16,9 @@ namespace ATWiki {
     public string sortType = "Name▲";
     
     public string filename = "";
+    public string backupLocation = "";
+    public string now = "";
+
     public List<string> filelist = new List<string>();
     
     private string[] args = null;
@@ -27,7 +30,23 @@ namespace ATWiki {
     private UserControlFile userControlFile;
     
     private bool zoomed = false;
-    
+
+    public string BackupLocation {
+        get {
+            if (!System.IO.Directory.Exists(backupLocation)) {
+                string userFolder = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName;
+                if (Environment.OSVersion.Version.Major >= 6) {
+                    userFolder = Directory.GetParent(userFolder).ToString();
+                }
+                string backupDirectory = userFolder + Path.DirectorySeparatorChar + "Documents" + Path.DirectorySeparatorChar + "TiddlyWikiBackups";
+                Directory.CreateDirectory(backupDirectory);
+                Program.mainForm.backupLocation = backupDirectory;
+            }
+
+            return Program.mainForm.backupLocation;
+        }
+    }
+
     public MainForm(string[] args) {
       // The InitializeComponent() call is required for Windows Forms designer support.
       InitializeComponent();
@@ -38,6 +57,13 @@ namespace ATWiki {
       timer.Interval = 20;
       timer.Tick += timer_Tick;
       
+      now = DateTime.Now.Year.ToString()
+        + DateTime.Now.Month.ToString()
+        + DateTime.Now.DayOfYear.ToString()
+        + DateTime.Now.Hour.ToString()
+        + DateTime.Now.Minute.ToString()
+        + DateTime.Now.Second.ToString();
+
       // 菜单
       menuStrip1.Visible = false;
       userControlFile = new UserControlFile();
@@ -91,6 +117,10 @@ namespace ATWiki {
         for (int i = 0; i < xfilelist.Count; i++) {
           filelist.Add(xfilelist[i].InnerText);
         }
+
+        XmlNode backupLoc = xmlOption.GetElementsByTagName("backupLocation")[0];        
+        backupLocation = backupLoc.InnerText;
+                
       } catch (Exception ex) {
         MessageBox.Show("Broken option.xml :\r\n" + ex.Message,
           Program.i18n.GetString("Error"),
@@ -108,6 +138,7 @@ namespace ATWiki {
       if (args.Length > 0 && File.Exists(args[0])) {
         openFile(args[0]);
       }
+      
     }
     void MainFormLocationChanged(object sender, EventArgs e) {
       MainFormSizeChanged(sender, e);
@@ -155,11 +186,15 @@ namespace ATWiki {
         efilelist.AppendChild(eitem);
       }
       eOption.AppendChild(efilelist);
-      
+
+      XmlElement eBackupLocation = xmlOption.CreateElement("backupLocation");
+            
+      eBackupLocation.InnerText = BackupLocation;
+      eOption.AppendChild(eBackupLocation);
+
       xmlOption.AppendChild(eOption);
       xmlOption.Save(Path.GetDirectoryName(Application.ExecutablePath) + "\\option.xml");
     }
-
     public void ToolStripMenuItemNewClick(object sender, EventArgs e) {
       if (this.saveFileDialog1.ShowDialog() != DialogResult.OK)
         return;
@@ -212,7 +247,7 @@ namespace ATWiki {
     }
     void WebBrowser1ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e) {
       // Console.WriteLine(e.CurrentProgress + "/" + e.MaximumProgress);
-              
+
       if (e.CurrentProgress == e.MaximumProgress) {
         object jsObject = webBrowser1.Document.InvokeScript("eval", new object[] {
           "typeof(ATWikiSaver)"
@@ -355,9 +390,10 @@ namespace ATWiki {
       webBrowser1.DocumentText = HTML;
       panelFile.Visible = false;
     }
-    public void showTip() { // 显示提示
-      label1.Text = Program.i18n.GetString("Saved to : ") + "\r\n" + filename;
-      panel1.Height = 0;
+    public void showTip() { // 显示提示            
+      label1.Text = Program.i18n.GetString("Saved to : ") + filename;
+      label1.Text += Program.i18n.GetString("\r\n\r\nBackup to : ") + backupLocation + Path.DirectorySeparatorChar + Path.GetFileName(filename) + Program.mainForm.now;
+      panel1.Height = 2;
       panel1.Visible = true;
       timerStatus = 0;
       timerCount = 0;
@@ -398,13 +434,30 @@ namespace ATWiki {
       MessageBox.Show(text);
     }
     public Boolean saveFile(string pathname, string text) { // 保存
+      Program.mainForm.backupLocation = Program.mainForm.BackupLocation;
+
       try {
+        string backupFilename = Program.mainForm.backupLocation + Path.DirectorySeparatorChar + Path.GetFileName(Program.mainForm.filename);
+        Program.mainForm.now = DateTime.Now.Year.ToString()
+                            + DateTime.Now.Month.ToString()
+                            + DateTime.Now.DayOfYear.ToString()
+                            + DateTime.Now.Hour.ToString()
+                            + DateTime.Now.Minute.ToString()
+                            + DateTime.Now.Second.ToString();
+
         var fs = new FileStream(Program.mainForm.filename, FileMode.Create);
         var sw = new StreamWriter(fs);
         sw.Write(text);
         sw.Flush();
         sw.Close();
         fs.Close();
+        
+        var bfs = new FileStream(backupFilename + ".backup_" + Program.mainForm.now, FileMode.Create);
+        var bsw = new StreamWriter(bfs);
+        bsw.Write(text);
+        bsw.Flush();
+        bsw.Close();
+        bfs.Close();        
       
         Program.mainForm.showTip();
         return true;
