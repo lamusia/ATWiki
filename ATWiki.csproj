@@ -181,11 +181,14 @@
     <EmbeddedResource Include="Properties\empty.html" />
     <EmbeddedResource Include="Properties\about.html" />
     <EmbeddedResource Include="Properties\about-zh-CN.html" />
+    <EmbeddedResource Include="Properties\about-zh-TW.html" />
     <EmbeddedResource Include="Properties\help.html" />
     <EmbeddedResource Include="Properties\help-zh-CN.html" />
-    <Content Include="Source\ObjectListView\CustomDictionary.xml" />
-    <EmbeddedResource Include="Properties\about-zh-TW.html" />
     <EmbeddedResource Include="Properties\help-zh-TW.html" />
+    <EmbeddedResource Include="Properties\option.html" />
+    <EmbeddedResource Include="Properties\option-zh-CN.html" />
+    <EmbeddedResource Include="Properties\option-zh-TW.html" />
+    <Content Include="Source\ObjectListView\CustomDictionary.xml" />
     <None Include="Source\ObjectListView\Resources\clear-filter.png" />
     <None Include="Source\ObjectListView\Resources\filter-icons3.png" />
     <None Include="Source\ObjectListView\Resources\filter.png" />

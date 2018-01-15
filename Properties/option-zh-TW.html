@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>設定 - ATWiki</title>
+  <style type="text/css">
+    a {
+      color: #3366FF;
+      text-decoration: none;
+      transition: all 0.5s;
+    }
+    a:hover {
+      color: #FFCC33;
+      cursor: pointer;
+      text-shadow: 0.0em 0.0em 0.05em #000099;
+      transition: all 0.3s;
+    }
+    a:active {
+      color: #000099;
+      transition: all 0.3s;
+    }
+    blockquote {
+      background-color:#ffffe0;
+    }
+  </style>
+</head>
+<body>
+<h5><a href="javascript:void(0)" onclick="window.external.home();">返回主頁</a></h5>
+<h1>設定</h1>
+<hr />
+<h3>備份</h3>
+<div style="margin-left: 40px; ">
+<input id="enable" type="checkbox" /> 啟用<br />
+<input id="overwrite" type="checkbox" /> 覆蓋已存在的文件<br />
+檔案名：<input id="filename" type="text" value="" style="width: 60%; " /><br />
+變數<br />
+<table border="1" cellpadding="3" cellspacing="0" style="width: 80%; ">
+  <tbody>
+    <tr style="background-color: #dee7ec; ">
+      <td>語法</td>
+      <td>說明</td>
+      <td>示例</td>
+    </tr>
+    <tr>
+      <td>&lt;folder&gt;</td>
+      <td>獲取檔目錄</td>
+      <td>D:\doc</td>
+    </tr>
+    <tr>
+      <td>&lt;filename&gt;</td>
+      <td>獲取檔案名</td>
+      <td>note</td>
+    </tr>
+    <tr>
+      <td>&lt;fileext&gt;</td>
+      <td>獲取文件副檔名</td>
+      <td>html</td>
+    </tr>
+    <tr>
+      <td>&lt;fyear&gt;</td>
+      <td>獲取檔修改的年份，格式化為 4 位</td>
+      <td>2018</td>
+    </tr>
+    <tr>
+      <td>&lt;fmonth&gt;</td>
+      <td>獲取檔修改的月份，格式化為 2 位</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>&lt;fday&gt;</td>
+      <td>獲取檔修改的日，格式化為 2 位</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>&lt;fhour&gt;</td>
+      <td>獲取檔修改的小時，格式化為 2 位</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>&lt;fminute&gt;</td>
+      <td>獲取檔修改的分鐘，格式化為 2 位</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>&lt;fsecond&gt;</td>
+      <td>獲取檔修改的秒，格式化為 2 位</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>&lt;year&gt;</td>
+      <td>獲取當前年份，格式化為 4 位</td>
+      <td>2018</td>
+    </tr>
+    <tr>
+      <td>&lt;month&gt;</td>
+      <td>獲取當前月份，格式化為 2 位</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>&lt;day&gt;</td>
+      <td>獲取當前日，格式化為 2 位</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>&lt;hour&gt;</td>
+      <td>獲取當前小時，格式化為 2 位</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>&lt;minute&gt;</td>
+      <td>獲取當前分鐘，格式化為 2 位</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>&lt;second&gt;</td>
+      <td>獲取當前秒，格式化為 2 位</td>
+      <td>60</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<script language="javascript" type="text/javascript">
+window.onbeforeunload = function(event) {
+  return;
+}
+window.onload = function() {
+  document.getElementById("enable").checked = window.external.backupEnable('');
+  document.getElementById("overwrite").checked = window.external.backupOverwrite('');
+  document.getElementById("filename").value = window.external.backupFilename('');
+  document.getElementById("enable").onchange = function() {
+    window.external.backupEnable(''+document.getElementById("enable").checked);
+  }
+  document.getElementById("overwrite").onchange = function() {
+    window.external.backupOverwrite(''+document.getElementById("overwrite").checked);
+  }
+  document.getElementById("filename").onchange = function() {
+    window.external.backupFilename(document.getElementById("filename").value);
+  }
+}
+</script>
+</body>
+</html>

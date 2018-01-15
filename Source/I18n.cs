@@ -27,32 +27,35 @@ namespace ATWiki {
         }
       }
     }
-    
+
     public string GetString(string str) {
       if (rm == null)
         return str;
 
+      if ((string)rm.GetObject(str) == null)
+        return str;
+
       return (string)rm.GetObject(str);
     }
-    
+
     public void UpdateControls(Control.ControlCollection Controls) {
       foreach (Control ctl in Controls) {
         if (ctl is UserControl) {
           continue;
         }
-        
+
         // Console.WriteLine(ctl.Name + " - " + ctl.GetType());
         if (ctl.HasChildren) {
           UpdateControls(ctl.Controls);
         }
-        
+
         // 语言
         if (rm != null && ctl.Text != null) {
           string str = (string)rm.GetObject(ctl.Name + ".Text");
           if (!string.IsNullOrEmpty(str))
             ctl.Text = str;
         }
-        
+
         // 缩放
         if (ctl.Font != null) {
           var font = new Font(ctl.Font.FontFamily,
@@ -104,20 +107,20 @@ namespace ATWiki {
         }
         //Console.WriteLine(ctl.Name + " - " + ctl.GetType() +
         //" Width, Height " + ctl.Size.Width + "," + ctl.Size.Height);
-        
+
         //var menuStrip = ctl as MenuStrip;
         //if (menuStrip != null) {
         //  UpdateMenus(menuStrip.Items);
         //}
       }
     }
-    
+
     public void UpdateMenus(ToolStripItemCollection Menus) {
       foreach (ToolStripMenuItem menu in Menus) {
         if (menu.HasDropDownItems) {
           UpdateMenus(menu.DropDownItems);
         }
-        
+
         if (rm != null) {
           string str = (string)rm.GetObject(menu.Name + ".Text");
           if (!string.IsNullOrEmpty(str))

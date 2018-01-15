@@ -14,30 +14,32 @@ namespace ATWiki {
   /// </summary>
   public partial class MainForm : Form {
     public string sortType = "Name▲";
-    
-    public string filename = "";
     public List<string> filelist = new List<string>();
-    
+    public string filename = "";
+    public bool backupEnable = false;
+    public bool backupOverwrite = false;
+    public string backupFilename = "<folder>\\<filename>.<fyear>-<fmonth>-<fday>.<fileext>";
+
     private string[] args = null;
     private Rectangle oldBounds;
-    
+
     private Timer timer;
     private int timerStatus = 0;
     private int timerCount = 0;
     private UserControlFile userControlFile;
-    
+
     private bool zoomed = false;
-    
+
     public MainForm(string[] args) {
       // The InitializeComponent() call is required for Windows Forms designer support.
       InitializeComponent();
-            
+
       // 初始化
       this.args = args;
       timer = new Timer();
       timer.Interval = 20;
       timer.Tick += timer_Tick;
-      
+
       // 菜单
       menuStrip1.Visible = false;
       userControlFile = new UserControlFile();
@@ -45,11 +47,11 @@ namespace ATWiki {
       panelFile.Controls.Add(userControlFile);
       panelFile.Dock = DockStyle.Fill;
       panelFile.Visible = true;
-      
+
       // 提示
       panel1.Visible = false;
       //label1.Dock = DockStyle.None;
-      
+
       // 语言&缩放
       this.Size = new System.Drawing.Size(
         this.Size.Width * Program.dpiZoom / 100,
@@ -61,40 +63,60 @@ namespace ATWiki {
       this.panel1.Location = new System.Drawing.Point(
         this.ClientRectangle.Width - this.panel1.Size.Width - 30 * Program.dpiZoom / 100,
         this.ClientRectangle.Height - this.panel1.Size.Height - 30 * Program.dpiZoom / 100);
-      
+
       // 读取 option.xml
       var xmlOption = new XmlDocument();
       try {
         xmlOption.Load(Path.GetDirectoryName(Application.ExecutablePath) + "\\option.xml");
-        
-        XmlNode position = xmlOption.GetElementsByTagName("position")[0];
-        this.Left = Convert.ToInt32(position.Attributes["x"].Value);
-        this.Top = Convert.ToInt32(position.Attributes["y"].Value);
-        this.Width = Convert.ToInt32(position.Attributes["w"].Value);
-        this.Height = Convert.ToInt32(position.Attributes["h"].Value);
-        if (position.Attributes["s"].Value == Convert.ToString(FormWindowState.Maximized))
-          this.WindowState = FormWindowState.Maximized;
-        
-        string asortType = xmlOption.GetElementsByTagName("filelist")[0].Attributes["sort"].Value;
-        List<string> sortTypes = new List<string> {
-          "Name▲",
-          "Name▼",
-          "Date▲",
-          "Date▼",
-          "Size▲",
-          "Size▼"
-        };
-        if (sortTypes.Contains(asortType))
-          sortType = asortType;
-        
-        XmlNodeList xfilelist = xmlOption.GetElementsByTagName("filelist")[0].ChildNodes;
-        for (int i = 0; i < xfilelist.Count; i++) {
-          filelist.Add(xfilelist[i].InnerText);
+
+        XmlNode xmlNode = xmlOption.GetElementsByTagName("position")[0];
+        if (xmlNode != null) {
+          if (xmlNode.Attributes["x"] != null)
+            this.Left = Convert.ToInt32(xmlNode.Attributes["x"].Value);
+          if (xmlNode.Attributes["y"] != null)
+            this.Top = Convert.ToInt32(xmlNode.Attributes["y"].Value);
+          if (xmlNode.Attributes["w"] != null)
+            this.Width = Convert.ToInt32(xmlNode.Attributes["w"].Value);
+          if (xmlNode.Attributes["h"] != null)
+            this.Height = Convert.ToInt32(xmlNode.Attributes["h"].Value);
+          if (xmlNode.Attributes["s"] != null)
+          if (xmlNode.Attributes["s"].Value == Convert.ToString(FormWindowState.Maximized))
+            this.WindowState = FormWindowState.Maximized;
+        }
+
+        xmlNode = xmlOption.GetElementsByTagName("filelist")[0];
+        if (xmlNode != null) {
+          if (xmlNode.Attributes["sort"] != null) {
+            string asortType = xmlNode.Attributes["sort"].Value;
+            List<string> sortTypes = new List<string> {
+              "Name▲",
+              "Name▼",
+              "Date▲",
+              "Date▼",
+              "Size▲",
+              "Size▼"
+            };
+            if (sortTypes.Contains(asortType))
+              sortType = asortType;
+          }
+
+          XmlNodeList xfilelist = xmlNode.ChildNodes;
+          for (int i = 0; i < xfilelist.Count; i++) {
+            filelist.Add(xfilelist[i].InnerText);
+          }
+        }
+
+        xmlNode = xmlOption.GetElementsByTagName("backup")[0];
+        if (xmlNode != null) {
+          if (xmlNode.Attributes["enable"] != null)
+            backupEnable = Convert.ToBoolean(xmlNode.Attributes["enable"].Value);
+          if (xmlNode.Attributes["overwrite"] != null)
+            backupOverwrite = Convert.ToBoolean(xmlNode.Attributes["overwrite"].Value);
+          if (xmlNode.Attributes["filename"] != null)
+            backupFilename = xmlNode.Attributes["filename"].Value;
         }
       } catch (Exception ex) {
-        MessageBox.Show("Broken option.xml :\r\n" + ex.Message,
-          Program.i18n.GetString("Error"),
-          MessageBoxButtons.OK, MessageBoxIcon.Hand);
+        Console.WriteLine("Broken option.xml : " + ex.Message);
       }
       oldBounds.X = this.Left;
       oldBounds.Y = this.Top;
@@ -134,7 +156,7 @@ namespace ATWiki {
           }
         }
       }
-      
+
       // 写入 option.xml
       var xmlOption = new XmlDocument();
       XmlElement eOption = xmlOption.CreateElement("option");
@@ -155,7 +177,13 @@ namespace ATWiki {
         efilelist.AppendChild(eitem);
       }
       eOption.AppendChild(efilelist);
-      
+
+      XmlElement ebackup = xmlOption.CreateElement("backup");
+      ebackup.SetAttribute("enable", Convert.ToString(backupEnable));
+      ebackup.SetAttribute("overwrite", Convert.ToString(backupOverwrite));
+      ebackup.SetAttribute("filename", backupFilename);
+      eOption.AppendChild(ebackup);
+
       xmlOption.AppendChild(eOption);
       xmlOption.Save(Path.GetDirectoryName(Application.ExecutablePath) + "\\option.xml");
     }
@@ -163,9 +191,9 @@ namespace ATWiki {
     public void ToolStripMenuItemNewClick(object sender, EventArgs e) {
       if (this.saveFileDialog1.ShowDialog() != DialogResult.OK)
         return;
-      
+
       string afilename = this.saveFileDialog1.FileName;
-      
+
       // 写文件
       /*
       var resourceManager = new ResourceManager("Properties", typeof(Program).Assembly);
@@ -180,13 +208,20 @@ namespace ATWiki {
       fileStream.Write(buffer, 0, buffer.Length);
       fileStream.Flush();
       fileStream.Close();
-      
+
       // 打开
       openFile(afilename);
     }
     public void ToolStripMenuItemOpenClick(object sender, EventArgs e) {
       if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
         openFile(this.openFileDialog1.FileName);
+    }
+    public void ToolStripMenuItemOptionClick(object sender, EventArgs e) {
+      var stream = GetType().Assembly.GetManifestResourceStream("ATWiki.Properties." + Program.i18n.GetString("option.html"));
+      stream.Position = 0;
+      var reader = new StreamReader(stream);
+      string text = reader.ReadToEnd();
+      openText(text);
     }
     public void ToolStripMenuItemHelpClick(object sender, EventArgs e) {
       var stream = GetType().Assembly.GetManifestResourceStream("ATWiki.Properties." + Program.i18n.GetString("help.html"));
@@ -203,7 +238,7 @@ namespace ATWiki {
       string text = reader.ReadToEnd();
       openText(text);
     }
-    
+
     void WebBrowser1Navigated(object sender, WebBrowserNavigatedEventArgs e) {
       // Console.WriteLine(e.Url);
     }
@@ -212,7 +247,7 @@ namespace ATWiki {
     }
     void WebBrowser1ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e) {
       // Console.WriteLine(e.CurrentProgress + "/" + e.MaximumProgress);
-              
+
       if (e.CurrentProgress == e.MaximumProgress) {
         object jsObject = webBrowser1.Document.InvokeScript("eval", new object[] {
           "typeof(ATWikiSaver)"
@@ -220,7 +255,7 @@ namespace ATWiki {
         if (jsObject.ToString() != "undefined") {
           return;
         }
-      
+
         // 设置 WebInterface
         webBrowser1.Document.InvokeScript("eval", new object[] {
           "ATWikiSaver = function(text,method,callback) {"
@@ -259,7 +294,7 @@ namespace ATWiki {
     }
     void WebBrowser1DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e) {
       // Console.WriteLine("WebBrowser1DocumentCompleted");
-      
+
       // 设置 DPI
       /*
       var wb = (dynamic)this.webBrowser1.GetType().GetField("axIWebBrowser2",
@@ -278,15 +313,15 @@ namespace ATWiki {
           }
         }
         SendKeys.SendWait("^0");
-        
+
         if (Program.dpiZoom <= 50)
           SendKeys.SendWait("^-");
         if (50 < Program.dpiZoom && Program.dpiZoom <= 75)
           SendKeys.SendWait("^-");
-        
+
         if (75 < Program.dpiZoom && Program.dpiZoom <= 100)
           SendKeys.SendWait("^0");
-        
+
         if (100 < Program.dpiZoom)
           SendKeys.SendWait("^=");
         if (125 < Program.dpiZoom)
@@ -301,11 +336,14 @@ namespace ATWiki {
           SendKeys.SendWait("^=");
         if (300 < Program.dpiZoom)
           SendKeys.SendWait("^=");
-        
+
         SendKeys.SendWait("{HOME}");
         //webBrowser1.Document.Window.ScrollTo(0, webBrowser1.Document.Body.ScrollRectangle.Height);
       }
-      
+      // 标题
+      this.Text = (sender as WebBrowser).DocumentTitle;
+    }
+    void webBrowser1DocumentTitleChanged(object sender, EventArgs e) {
       // 标题
       this.Text = (sender as WebBrowser).DocumentTitle;
     }
@@ -333,7 +371,7 @@ namespace ATWiki {
         }
       }
     }
-    
+
     // ============  ============
     public void openFile(string afilename) {
       if (!File.Exists(afilename)) {
@@ -343,11 +381,11 @@ namespace ATWiki {
       filename = afilename;
       webBrowser1.Navigate(new Uri(afilename));
       panelFile.Visible = false;
-      
+
       //this.userControlFile.Dispose();
       //this.panelFile.Dispose();
       //GC.Collect();
-      
+
       if (!filelist.Contains(afilename))
         filelist.Add(afilename);
     }
@@ -368,7 +406,7 @@ namespace ATWiki {
       panelFile.Visible = true;
       this.Text = Program.sTitle;
       zoomed = false;
-      
+
       this.Controls.Remove(this.webBrowser1);
       this.webBrowser1.Dispose();
       this.webBrowser1 = new System.Windows.Forms.WebBrowser();
@@ -385,7 +423,7 @@ namespace ATWiki {
       GC.Collect();
     }
   }
-  
+
   /// <summary>
   /// WebInterface
   /// </summary>
@@ -397,15 +435,44 @@ namespace ATWiki {
     public void showMessage(string text) {
       MessageBox.Show(text);
     }
-    public Boolean saveFile(string pathname, string text) { // 保存
+    public bool saveFile(string pathname, string text) { // 保存
       try {
+        string backupFilename = Program.mainForm.backupFilename;
+        backupFilename = backupFilename.Replace("<folder>",
+          Path.GetDirectoryName(Program.mainForm.filename));
+        backupFilename = backupFilename.Replace("<filename>",
+          Path.GetFileNameWithoutExtension(Program.mainForm.filename));
+        backupFilename = backupFilename.Replace("<fileext>",
+          Path.GetExtension(Program.mainForm.filename).Substring(1));
+        DateTime dt = File.GetLastWriteTime(Program.mainForm.filename);
+        backupFilename = backupFilename.Replace("<fyear>", dt.ToString("yyyy"));
+        backupFilename = backupFilename.Replace("<fmonth>", dt.ToString("MM"));
+        backupFilename = backupFilename.Replace("<fday>", dt.ToString("dd"));
+        backupFilename = backupFilename.Replace("<fhour>", dt.ToString("HH"));
+        backupFilename = backupFilename.Replace("<fminute>", dt.ToString("mm"));
+        backupFilename = backupFilename.Replace("<fsecond>", dt.ToString("ss"));
+        backupFilename = backupFilename.Replace("<year>", DateTime.Now.ToString("yyyy"));
+        backupFilename = backupFilename.Replace("<month>", DateTime.Now.ToString("MM"));
+        backupFilename = backupFilename.Replace("<day>", DateTime.Now.ToString("dd"));
+        backupFilename = backupFilename.Replace("<hour>", DateTime.Now.ToString("HH"));
+        backupFilename = backupFilename.Replace("<minute>", DateTime.Now.ToString("mm"));
+        backupFilename = backupFilename.Replace("<second>", DateTime.Now.ToString("ss"));
+        if (Program.mainForm.backupEnable
+            && (!File.Exists(backupFilename) || Program.mainForm.backupOverwrite)) {
+          if (File.Exists(backupFilename))
+            File.Delete(backupFilename);
+          if (!Directory.Exists(Path.GetDirectoryName(backupFilename)))
+            Directory.CreateDirectory(Path.GetDirectoryName(backupFilename));
+          File.Move(Program.mainForm.filename, backupFilename);
+        }
+
         var fs = new FileStream(Program.mainForm.filename, FileMode.Create);
         var sw = new StreamWriter(fs);
         sw.Write(text);
         sw.Flush();
         sw.Close();
         fs.Close();
-      
+
         Program.mainForm.showTip();
         return true;
       } catch (Exception ex) {
@@ -417,6 +484,25 @@ namespace ATWiki {
     }
     public void home() {
       Program.mainForm.showPanelFile();
+    }
+    public bool backupEnable(string text) {
+      if (text == "true")
+        Program.mainForm.backupEnable = true;
+      if (text == "false")
+        Program.mainForm.backupEnable = false;
+      return Program.mainForm.backupEnable;
+    }
+    public bool backupOverwrite(string text) {
+      if (text == "true")
+        Program.mainForm.backupOverwrite = true;
+      if (text == "false")
+        Program.mainForm.backupOverwrite = false;
+      return Program.mainForm.backupOverwrite;
+    }
+    public string backupFilename(string text) {
+      if (text != "")
+        Program.mainForm.backupFilename = text;
+      return Program.mainForm.backupFilename;
     }
   }
 }

@@ -10,15 +10,15 @@ namespace ATWiki {
     /// <summary>
     /// Program entry point.
     /// </summary>
-    
+
     public static MainForm mainForm = null;
     public static int dpiZoom = 100;
     public static I18n i18n = null;
-    
+
     public const string sTitle = "ATWiki";
-    public const string sVersion = "1.7";
-    
-    
+    public const string sVersion = "1.8";
+
+
     [STAThread]
     private static void Main(string[] args) {
       Application.EnableVisualStyles();
@@ -30,16 +30,16 @@ namespace ATWiki {
         float dpiY = graphics.DpiY;
         dpiZoom = (int)((dpiX + dpiY) / 2 / 96 * 100);
       }
-      
+
       // 设置 i18n
       i18n = new I18n();
-      
+
       // 启动
       mainForm = new MainForm(args);
       Application.Run(mainForm);
     }
   }
-  
+
   /// <summary>
   /// Utility
   /// </summary>

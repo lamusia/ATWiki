@@ -9,6 +9,7 @@
     private System.Windows.Forms.Label labelTitle;
     private System.Windows.Forms.Button buttonNew;
     private System.Windows.Forms.Button buttonOpen;
+    private System.Windows.Forms.Button buttonOption;
     private System.Windows.Forms.Button buttonHelp;
     private System.Windows.Forms.Button buttonAbout;
     private System.Windows.Forms.Panel panel2;
@@ -29,7 +30,7 @@
     private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRemove;
     private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRemoveAll;
     private System.Windows.Forms.Panel panel3;
-    
+
     /// <summary>
     /// Disposes resources used by the control.
     /// </summary>
@@ -42,7 +43,7 @@
       }
       base.Dispose(disposing);
     }
-    
+
     /// <summary>
     /// This method is required for Windows Forms designer support.
     /// Do not change the method contents inside the source code editor. The Forms designer might
@@ -60,10 +61,11 @@
       this.toolStripMenuItemRemoveAll = new System.Windows.Forms.ToolStripMenuItem();
       this.panel1 = new System.Windows.Forms.Panel();
       this.labelTitle = new System.Windows.Forms.Label();
-      this.buttonAbout = new System.Windows.Forms.Button();
-      this.buttonHelp = new System.Windows.Forms.Button();
       this.buttonNew = new System.Windows.Forms.Button();
       this.buttonOpen = new System.Windows.Forms.Button();
+      this.buttonOption = new System.Windows.Forms.Button();
+      this.buttonHelp = new System.Windows.Forms.Button();
+      this.buttonAbout = new System.Windows.Forms.Button();
       this.pictureBox1 = new System.Windows.Forms.PictureBox();
       this.panel2 = new System.Windows.Forms.Panel();
       this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
@@ -72,10 +74,10 @@
       this.columnSize = new BrightIdeasSoftware.OLVColumn();
       this.panel3 = new System.Windows.Forms.Panel();
       this.labelRecent = new System.Windows.Forms.Label();
-      this.comboBox1 = new System.Windows.Forms.ComboBox();
       this.labelSort = new System.Windows.Forms.Label();
-      this.textBoxFilter = new System.Windows.Forms.TextBox();
+      this.comboBox1 = new System.Windows.Forms.ComboBox();
       this.labelSearch = new System.Windows.Forms.Label();
+      this.textBoxFilter = new System.Windows.Forms.TextBox();
       this.contextMenuStrip1.SuspendLayout();
       this.panel1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -142,10 +144,11 @@
       // 
       this.panel1.BackColor = System.Drawing.Color.LightSkyBlue;
       this.panel1.Controls.Add(this.labelTitle);
-      this.panel1.Controls.Add(this.buttonAbout);
-      this.panel1.Controls.Add(this.buttonHelp);
       this.panel1.Controls.Add(this.buttonNew);
       this.panel1.Controls.Add(this.buttonOpen);
+      this.panel1.Controls.Add(this.buttonOption);
+      this.panel1.Controls.Add(this.buttonHelp);
+      this.panel1.Controls.Add(this.buttonAbout);
       this.panel1.Controls.Add(this.pictureBox1);
       this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
       this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -166,36 +169,6 @@
       this.labelTitle.TabIndex = 0;
       this.labelTitle.Text = "ATWiki";
       this.labelTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-      // 
-      // buttonAbout
-      // 
-      this.buttonAbout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-      | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonAbout.BackColor = System.Drawing.Color.Transparent;
-      this.buttonAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.buttonAbout.Location = new System.Drawing.Point(30, 408);
-      this.buttonAbout.Margin = new System.Windows.Forms.Padding(10);
-      this.buttonAbout.Name = "buttonAbout";
-      this.buttonAbout.Size = new System.Drawing.Size(240, 40);
-      this.buttonAbout.TabIndex = 4;
-      this.buttonAbout.Text = "About";
-      this.buttonAbout.UseVisualStyleBackColor = false;
-      this.buttonAbout.Click += new System.EventHandler(this.ButtonAboutClick);
-      // 
-      // buttonHelp
-      // 
-      this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-      | System.Windows.Forms.AnchorStyles.Right)));
-      this.buttonHelp.BackColor = System.Drawing.Color.Transparent;
-      this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.buttonHelp.Location = new System.Drawing.Point(30, 348);
-      this.buttonHelp.Margin = new System.Windows.Forms.Padding(10);
-      this.buttonHelp.Name = "buttonHelp";
-      this.buttonHelp.Size = new System.Drawing.Size(240, 40);
-      this.buttonHelp.TabIndex = 3;
-      this.buttonHelp.Text = "Help";
-      this.buttonHelp.UseVisualStyleBackColor = true;
-      this.buttonHelp.Click += new System.EventHandler(this.ButtonHelpClick);
       // 
       // buttonNew
       // 
@@ -226,6 +199,51 @@
       this.buttonOpen.Text = "Open";
       this.buttonOpen.UseVisualStyleBackColor = false;
       this.buttonOpen.Click += new System.EventHandler(this.ButtonOpenClick);
+      // 
+      // buttonOption
+      // 
+      this.buttonOption.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonOption.BackColor = System.Drawing.Color.Transparent;
+      this.buttonOption.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonOption.Location = new System.Drawing.Point(30, 348);
+      this.buttonOption.Margin = new System.Windows.Forms.Padding(10);
+      this.buttonOption.Name = "buttonOption";
+      this.buttonOption.Size = new System.Drawing.Size(240, 40);
+      this.buttonOption.TabIndex = 3;
+      this.buttonOption.Text = "Option";
+      this.buttonOption.UseVisualStyleBackColor = false;
+      this.buttonOption.Click += new System.EventHandler(this.ButtonOptionClick);
+      // 
+      // buttonHelp
+      // 
+      this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonHelp.BackColor = System.Drawing.Color.Transparent;
+      this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonHelp.Location = new System.Drawing.Point(30, 408);
+      this.buttonHelp.Margin = new System.Windows.Forms.Padding(10);
+      this.buttonHelp.Name = "buttonHelp";
+      this.buttonHelp.Size = new System.Drawing.Size(240, 40);
+      this.buttonHelp.TabIndex = 4;
+      this.buttonHelp.Text = "Help";
+      this.buttonHelp.UseVisualStyleBackColor = true;
+      this.buttonHelp.Click += new System.EventHandler(this.ButtonHelpClick);
+      // 
+      // buttonAbout
+      // 
+      this.buttonAbout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      | System.Windows.Forms.AnchorStyles.Right)));
+      this.buttonAbout.BackColor = System.Drawing.Color.Transparent;
+      this.buttonAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.buttonAbout.Location = new System.Drawing.Point(30, 468);
+      this.buttonAbout.Margin = new System.Windows.Forms.Padding(10);
+      this.buttonAbout.Name = "buttonAbout";
+      this.buttonAbout.Size = new System.Drawing.Size(240, 40);
+      this.buttonAbout.TabIndex = 5;
+      this.buttonAbout.Text = "About";
+      this.buttonAbout.UseVisualStyleBackColor = false;
+      this.buttonAbout.Click += new System.EventHandler(this.ButtonAboutClick);
       // 
       // pictureBox1
       // 
@@ -337,6 +355,17 @@
       this.labelRecent.TabIndex = 0;
       this.labelRecent.Text = "Recent Documents";
       // 
+      // labelSort
+      // 
+      this.labelSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.labelSort.AutoSize = true;
+      this.labelSort.Location = new System.Drawing.Point(273, 13);
+      this.labelSort.Margin = new System.Windows.Forms.Padding(8, 13, 8, 8);
+      this.labelSort.Name = "labelSort";
+      this.labelSort.Size = new System.Drawing.Size(44, 18);
+      this.labelSort.TabIndex = 1;
+      this.labelSort.Text = "Sort";
+      // 
       // comboBox1
       // 
       this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -358,16 +387,16 @@
       this.comboBox1.TabIndex = 2;
       this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.ComboBox1SelectionChangeCommitted);
       // 
-      // labelSort
+      // labelSearch
       // 
-      this.labelSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.labelSort.AutoSize = true;
-      this.labelSort.Location = new System.Drawing.Point(273, 13);
-      this.labelSort.Margin = new System.Windows.Forms.Padding(8, 13, 8, 8);
-      this.labelSort.Name = "labelSort";
-      this.labelSort.Size = new System.Drawing.Size(44, 18);
-      this.labelSort.TabIndex = 1;
-      this.labelSort.Text = "Sort";
+      this.labelSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.labelSearch.AutoSize = true;
+      this.labelSearch.Location = new System.Drawing.Point(485, 13);
+      this.labelSearch.Margin = new System.Windows.Forms.Padding(20, 13, 8, 8);
+      this.labelSearch.Name = "labelSearch";
+      this.labelSearch.Size = new System.Drawing.Size(62, 18);
+      this.labelSearch.TabIndex = 3;
+      this.labelSearch.Text = "Search";
       // 
       // textBoxFilter
       // 
@@ -379,17 +408,6 @@
       this.textBoxFilter.Size = new System.Drawing.Size(150, 28);
       this.textBoxFilter.TabIndex = 4;
       this.textBoxFilter.TextChanged += new System.EventHandler(this.TextBoxFilterTextChanged);
-      // 
-      // labelSearch
-      // 
-      this.labelSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.labelSearch.AutoSize = true;
-      this.labelSearch.Location = new System.Drawing.Point(485, 13);
-      this.labelSearch.Margin = new System.Windows.Forms.Padding(20, 13, 8, 8);
-      this.labelSearch.Name = "labelSearch";
-      this.labelSearch.Size = new System.Drawing.Size(62, 18);
-      this.labelSearch.TabIndex = 3;
-      this.labelSearch.Text = "Search";
       // 
       // UserControlFile
       // 

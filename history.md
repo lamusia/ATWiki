@@ -1,3 +1,7 @@
+1.8
+[improve] UI adjust
+[add] backup function
+
 1.7
 [improve] TiddlyWiki update to 5.1.15
 [improve] compatibility with encrypted document

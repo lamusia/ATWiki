@@ -117,11 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="If there are any unsaved changes, they will lost." xml:space="preserve">
-    <value>如果有任何未保存的更改，它们将丢失。</value>
+  <data name="buttonNew.Text" xml:space="preserve">
+    <value>新建</value>
   </data>
-  <data name="No thing to show" xml:space="preserve">
+  <data name="buttonOpen.Text" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="buttonOption.Text" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="buttonHelp.Text" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="buttonAbout.Text" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="labelRecent.Text" xml:space="preserve">
+    <value>最近的文档</value>
+  </data>
+  <data name="labelSort.Text" xml:space="preserve">
+    <value>排序</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>大小</value>
+  </data>
+  <data name="labelSearch.Text" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="Nothing to show" xml:space="preserve">
     <value>没有什么可显示</value>
+  </data>
+  <data name="toolStripMenuItemOpen.Text" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="toolStripMenuItemLocation.Text" xml:space="preserve">
+    <value>转到文件位置</value>
+  </data>
+  <data name="toolStripMenuItemDelete.Text" xml:space="preserve">
+    <value>永久删除</value>
+  </data>
+  <data name="toolStripMenuItemRemove.Text" xml:space="preserve">
+    <value>从列表中删除</value>
+  </data>
+  <data name="toolStripMenuItemRemoveAll.Text" xml:space="preserve">
+    <value>从列表中删除全部</value>
   </data>
   <data name="Can not open file : " xml:space="preserve">
     <value>无法打开文件：</value>
@@ -132,73 +177,34 @@
   <data name="Delete file : " xml:space="preserve">
     <value>删除文件：</value>
   </data>
-  <data name="labelRecent.Text" xml:space="preserve">
-    <value>最近的文档</value>
-  </data>
-  <data name="help.html" xml:space="preserve">
-    <value>help-zh-CN.html</value>
-  </data>
-  <data name="toolStripMenuItemRemoveAll.Text" xml:space="preserve">
-    <value>从列表中删除全部</value>
-  </data>
   <data name="Really delete? This can not be undo." xml:space="preserve">
     <value>确认删除？这不能撤销。</value>
-  </data>
-  <data name="buttonNew.Text" xml:space="preserve">
-    <value>新建</value>
-  </data>
-  <data name="labelSort.Text" xml:space="preserve">
-    <value>排序</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>错误</value>
   </data>
-  <data name="about.html" xml:space="preserve">
-    <value>about-zh-CN.html</value>
+  <data name="Can not delete file : " xml:space="preserve">
+    <value>无法删除文件：</value>
   </data>
-  <data name="toolStripMenuItemRemove.Text" xml:space="preserve">
-    <value>从列表中删除</value>
-  </data>
-  <data name="labelSearch.Text" xml:space="preserve">
-    <value>搜索</value>
+  <data name="Saved to : " xml:space="preserve">
+    <value>保存至：</value>
   </data>
   <data name="Really exit?" xml:space="preserve">
     <value>确认退出？</value>
   </data>
-  <data name="buttonOpen.Text" xml:space="preserve">
-    <value>打开</value>
-  </data>
-  <data name="toolStripMenuItemOpen.Text" xml:space="preserve">
-    <value>打开</value>
-  </data>
-  <data name="buttonHelp.Text" xml:space="preserve">
-    <value>帮助</value>
-  </data>
-  <data name="Can not delete file : " xml:space="preserve">
-    <value>无法删除文件：</value>
-  </data>
-  <data name="toolStripMenuItemDelete.Text" xml:space="preserve">
-    <value>永久删除</value>
+  <data name="If there are any unsaved changes, they will lost." xml:space="preserve">
+    <value>如果有任何未保存的更改，它们将丢失。</value>
   </data>
   <data name="empty.html" xml:space="preserve">
     <value>empty.html</value>
   </data>
-  <data name="buttonAbout.Text" xml:space="preserve">
-    <value>关于</value>
+  <data name="option.html" xml:space="preserve">
+    <value>option-zh-CN.html</value>
   </data>
-  <data name="toolStripMenuItemLocation.Text" xml:space="preserve">
-    <value>转到文件位置</value>
+  <data name="help.html" xml:space="preserve">
+    <value>help-zh-CN.html</value>
   </data>
-  <data name="Date" xml:space="preserve">
-    <value>日期</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>名称</value>
-  </data>
-  <data name="Size" xml:space="preserve">
-    <value>大小</value>
-  </data>
-  <data name="Saved to : " xml:space="preserve">
-    <value>保存至：</value>
+  <data name="about.html" xml:space="preserve">
+    <value>about-zh-CN.html</value>
   </data>
 </root>

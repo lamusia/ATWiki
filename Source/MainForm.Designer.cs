@@ -17,7 +17,8 @@
     private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     private System.Windows.Forms.Panel panelFile;
     private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemHelp;
-    
+    private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOption;
+
     /// <summary>
     /// Disposes resources used by the form.
     /// </summary>
@@ -31,7 +32,7 @@
       }
       base.Dispose(disposing);
     }
-    
+
     /// <summary>
     /// This method is required for Windows Forms designer support.
     /// Do not change the method contents inside the source code editor. The Forms designer might
@@ -43,6 +44,7 @@
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.toolStripMenuItemNew = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripMenuItemOption = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
       this.webBrowser1 = new System.Windows.Forms.WebBrowser();
@@ -61,6 +63,7 @@
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
       this.toolStripMenuItemNew,
       this.toolStripMenuItemOpen,
+      this.toolStripMenuItemOption,
       this.toolStripMenuItemHelp,
       this.toolStripMenuItemAbout});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -82,6 +85,13 @@
       this.toolStripMenuItemOpen.Size = new System.Drawing.Size(70, 28);
       this.toolStripMenuItemOpen.Text = "Open";
       this.toolStripMenuItemOpen.Click += new System.EventHandler(this.ToolStripMenuItemOpenClick);
+      // 
+      // toolStripMenuItemOption
+      // 
+      this.toolStripMenuItemOption.Name = "toolStripMenuItemOption";
+      this.toolStripMenuItemOption.Size = new System.Drawing.Size(83, 28);
+      this.toolStripMenuItemOption.Text = "Option";
+      this.toolStripMenuItemOption.Click += new System.EventHandler(this.ToolStripMenuItemOptionClick);
       // 
       // toolStripMenuItemHelp
       // 
@@ -106,6 +116,7 @@
       this.webBrowser1.Size = new System.Drawing.Size(1002, 512);
       this.webBrowser1.TabIndex = 1;
       this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowser1DocumentCompleted);
+      this.webBrowser1.DocumentTitleChanged += new System.EventHandler(this.webBrowser1DocumentTitleChanged);
       this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.WebBrowser1Navigated);
       this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.WebBrowser1Navigating);
       this.webBrowser1.ProgressChanged += new System.Windows.Forms.WebBrowserProgressChangedEventHandler(this.WebBrowser1ProgressChanged);
